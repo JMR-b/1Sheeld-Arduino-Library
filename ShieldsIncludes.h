@@ -131,3 +131,6 @@
 #ifdef INTERNET_SHIELD
 #include "InternetShield.h"
 #endif
+#ifdef NFC_SHIELD
+#include "NFCShield.h"
+#endif

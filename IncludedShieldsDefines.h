@@ -52,3 +52,4 @@
 #define REMOTE_SHIELD
 #define PATTERN_SHIELD
 #define INTERNET_SHIELD
+#define NFC_SHIELD
