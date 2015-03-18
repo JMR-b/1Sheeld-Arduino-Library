@@ -1,7 +1,7 @@
 #include "OneSheeld.h"
 #include "NFCShield.h"
 
-
+NFCTag NFCShield::nullTag;
 NFCShield::NFCShield():ShieldParent(NFC_ID)
 {
 	isErrorAssigned =false;
@@ -13,7 +13,8 @@ NFCShield::NFCShield():ShieldParent(NFC_ID)
 NFCTag & NFCShield::getLastTag()
 {
 	isNewTag=false;
-	return *tag;
+	if(tag!=NULL)return *tag;
+	return NFCShield::nullTag;
 }
 
 bool NFCShield::isNewTagScanned()
@@ -58,7 +59,7 @@ void NFCShield::processData()
 		byte recordsNumber = getOneSheeldInstance().getArgumentData(2)[0];
 
 		int tagSize = getOneSheeldInstance().getArgumentData(3)[0]|((getOneSheeldInstance().getArgumentData(3)[1])<<8);
-		Serial.println(tagId);
+
 		if(tag!=NULL)delete tag;
 		tag=new NFCTag(tagId,tagSize,tagMaxSize,recordsNumber);
 
@@ -67,13 +68,13 @@ void NFCShield::processData()
 		{
 			for(int i=4 ;i<recordsNumber; i++)
 			{
-				tag->getRecords()[i-4].recordType = getOneSheeldInstance().getArgumentData(i)[0];
-				tag->getRecords()[i-4].recordTypeLength = getOneSheeldInstance().getArgumentData(i)[1]|(getOneSheeldInstance().getArgumentData(i)[2]);
-				tag->getRecords()[i-4].recordDataLength = getOneSheeldInstance().getArgumentData(i)[3]|(getOneSheeldInstance().getArgumentData(i)[4]);
+				tag->getRecord(i-4).recordType = getOneSheeldInstance().getArgumentData(i)[0];
+				tag->getRecord(i-4).recordTypeLength = getOneSheeldInstance().getArgumentData(i)[1]|(getOneSheeldInstance().getArgumentData(i)[2]<<8);
+				tag->getRecord(i-4).recordDataLength = getOneSheeldInstance().getArgumentData(i)[3]|(getOneSheeldInstance().getArgumentData(i)[4]<<8);
 			}		
 		}
 
-		if(isNewTagSetOnAssigned)
+		if(isNewTagSetOnAssigned && !isInACallback())
 		{
 			enteringACallback();
 			(newTagCallBack)(*tag);
@@ -82,7 +83,7 @@ void NFCShield::processData()
 	}
 	else if(functionId == NFC_ON_ERROR)
 	{
-		if(isErrorAssigned)
+		if(isErrorAssigned && !isInACallback())
 		{
 			byte errorNumber = getOneSheeldInstance().getArgumentData(0)[0];
 			enteringACallback();
@@ -92,7 +93,7 @@ void NFCShield::processData()
 	}
 	else if(functionId == NFC_TAG_ON_PARSED )
 	{
-		if(tag != NULL && tag->isParsedDataCallBackAssigned)
+		if(tag != NULL && tag->isParsedDataCallBackAssigned && !isInACallback())
 		{
 			byte recordNumber = getOneSheeldInstance().getArgumentData(0)[0];
 
@@ -113,7 +114,7 @@ void NFCShield::processData()
 	}
 	else if(functionId == NFC_TAG_ON_TYPE)
 	{
-		if(tag != NULL && tag->isTypeCallBackAssigned)
+		if(tag != NULL && tag->isTypeCallBackAssigned && !isInACallback())
 		{
 			byte recordNumber = getOneSheeldInstance().getArgumentData(0)[0];
 
@@ -132,7 +133,7 @@ void NFCShield::processData()
 	}
 		else if(functionId == NFC_TAG_ON_DATA)
 	{
-		if(tag != NULL && tag->isDataCallBackAssigned)
+		if(tag != NULL && tag->isDataCallBackAssigned && !isInACallback())
 		{
 
 			byte recordNumber = getOneSheeldInstance().getArgumentData(0)[0];
@@ -146,7 +147,7 @@ void NFCShield::processData()
 			}
 
 			enteringACallback();
-			tag->recordTypeCallBack(recordNumber,incomingData);
+			tag->recordDataCallBack(recordNumber,incomingData);
 			exitingACallback();
 		}
 	}

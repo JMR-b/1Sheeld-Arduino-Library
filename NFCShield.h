@@ -16,16 +16,16 @@ public:
 	bool isNewTagScanned();
 	void setOnNewTagScanned(void (*)(NFCTag &));
 	void setOnError(void (*)(byte));
+	
 private:
 	bool isErrorAssigned;
 	bool isNewTag;
 	bool isNewTagSetOnAssigned;
-	int tagSize;
-	int tagUsedSize;
 	NFCTag * tag;
 	void processData();
 	void (*errorCallBack)(byte);
 	void (*newTagCallBack)(NFCTag &);
+	static NFCTag nullTag;
 };
 
 //Extern Object

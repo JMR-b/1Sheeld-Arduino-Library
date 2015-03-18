@@ -2,7 +2,7 @@
 #include "NFCTag.h"
 
 
-
+NFCRecord NFCTag::nullRecord;
 
 NFCTag::NFCTag(char * _tagId, int _tagSize, int _tagMaxSize, byte _recordsNumber)
 {
@@ -12,8 +12,9 @@ NFCTag::NFCTag(char * _tagId, int _tagSize, int _tagMaxSize, byte _recordsNumber
 	isParsedDataCallBackAssigned= false;
 
 	int idLength=strlen(_tagId);
-	tagId = (char *) malloc(sizeof(char)*idLength);
+	tagId = (char *) malloc(sizeof(char)*(idLength+1));
 	memcpy(tagId,_tagId,idLength);
+	tagId[idLength]='\0';
 
 	tagSize =_tagSize;
 	tagMaxSize =_tagMaxSize;
@@ -28,9 +29,23 @@ NFCTag::NFCTag(char * _tagId, int _tagSize, int _tagMaxSize, byte _recordsNumber
 	}
 }
 
-NFCRecord * NFCTag::getRecords()
+NFCTag::NFCTag()
 {
-	return *recordsArray;
+	isTypeCallBackAssigned= false;
+	isErrorCallBackAssigned= false;
+	isDataCallBackAssigned= false;
+	isParsedDataCallBackAssigned= false;
+	tagId=NULL;
+	tagSize=0;
+	tagMaxSize=0;
+	recordsNumber=0;
+	recordsArray=NULL;
+}
+
+NFCRecord & NFCTag::getRecord(int index)
+{
+	if(index>=recordsNumber)return NFCTag::nullRecord;
+	return *(recordsArray[index]);
 }
 
 int NFCTag::getSize()
@@ -82,13 +97,18 @@ void NFCTag::setOnRecordDataResponse(void (userFunction)(byte id,byte data []))
 	recordDataCallBack = userFunction;
 }
 
+bool NFCTag::isNull()
+{
+	return tagMaxSize==0;
+}
+
 NFCTag::~NFCTag()
 {
-	if(recordsNumber>0)
+	if(recordsNumber>0&&recordsArray!=NULL)
 	{
 		for(int i=0;i<recordsNumber;i++)
 			delete recordsArray[i];
 		free (recordsArray);
 	}
-	free (tagId);
+	if(tagId!=NULL)free (tagId);
 }

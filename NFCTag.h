@@ -15,7 +15,7 @@ public:
 	bool isEmpty();
 	char * getId();
 	byte getNumberOfRecords();
-	NFCRecord * getRecords();
+	NFCRecord & getRecord(int);
 	int getSize();
 	int getMaxSize();
 	bool isInit();
@@ -23,8 +23,10 @@ public:
 	void setOnRecordTypeResponse(void (*userFunction)(byte , byte []));
 	void setOnRecordParsedDataResponse(void (*userFunction)(byte , char[]));
 	void setOnRecordDataResponse(void (userFunction)(byte ,byte []));
+	bool isNull();
 	~NFCTag();
 private:
+	NFCTag();
 	bool isTypeCallBackAssigned;
 	bool isErrorCallBackAssigned;
 	bool isDataCallBackAssigned;
@@ -34,6 +36,7 @@ private:
 	int tagMaxSize;
 	byte recordsNumber;
 	NFCRecord ** recordsArray;
+	static NFCRecord nullRecord;
 
 	void (*errorCallBack)(byte);
 	void (*recordTypeCallBack)(byte , byte[]);
