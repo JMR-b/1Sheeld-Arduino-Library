@@ -18,7 +18,6 @@ public:
 	NFCRecord & getRecord(int);
 	int getSize();
 	int getMaxSize();
-	bool isInit();
 	void setOnError(void (*)(byte));
 	void setOnRecordTypeResponse(void (*userFunction)(byte , byte []));
 	void setOnRecordParsedDataResponse(void (*userFunction)(byte , char[]));

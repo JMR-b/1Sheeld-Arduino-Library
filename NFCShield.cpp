@@ -66,7 +66,7 @@ void NFCShield::processData()
 
 		if(tag->recordsNumber>0)
 		{
-			for(int i=4 ;i<recordsNumber; i++)
+			for(int i=4 ;i<recordsNumber+4; i++)
 			{
 				tag->getRecord(i-4).recordType = getOneSheeldInstance().getArgumentData(i)[0];
 				tag->getRecord(i-4).recordTypeLength = getOneSheeldInstance().getArgumentData(i)[1]|(getOneSheeldInstance().getArgumentData(i)[2]<<8);
