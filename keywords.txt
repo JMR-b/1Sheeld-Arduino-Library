@@ -47,6 +47,7 @@ Terminal	KEYWORD3
 Pattern	KEYWORD3
 Internet	KEYWORD3
 JsonKeyChain	KEYWORD3
+NFC	KEYWORD3
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
@@ -239,6 +240,25 @@ setOnNewPattern	KEYWORD2
 getLastCommandAsString	KEYWORD2
 RemoteOneSheeld	KEYWORD2
 PatternNode	KEYWORD2
+getLastTag	KEYWORD2
+isNewTagScanned	KEYWORD2
+setOnNewTagScanned	KEYWORD2
+isEmpty	KEYWORD2
+getId	KEYWORD2
+getNumberOfRecords	KEYWORD2
+getRecord	KEYWORD2
+getSize	KEYWORD2
+getMaxSize	KEYWORD2
+setOnRecordTypeResponse	KEYWORD2
+setOnRecordParsedDataResponse	KEYWORD2
+setOnRecordDataResponse	KEYWORD2
+isNull	KEYWORD2
+getType	KEYWORD2
+getTypeLength	KEYWORD2
+getDataLength	KEYWORD2
+queryData	KEYWORD2
+queryType	KEYWORD2
+queryParsedData	KEYWORD2
 #######################################
 # Constants And Literals (KEYWORD2)
 #######################################
@@ -271,3 +291,12 @@ NOT_CONNECTED_TO_NETWORK	LITERAL1
 URL_IS_NOT_FOUND	LITERAL1
 ALREADY_EXECUTING_REQUEST	LITERAL1
 URL_IS_WRONG	LITERAL1
+TNF_UNKNOWN	LITERAL1
+TNF_EMPTY	LITERAL1
+TNF_EXTERNAL_TYPE	LITERAL1
+TNF_MIME_MEDIA	LITERAL1
+TNF_UNCHANGED	LITERAL1
+TNF_ABSOLUTE_URI	LITERAL1
+RTD_TEXT	LITERAL1
+RTD_URI	LITERAL1
+RTD_UNSUPPORTED	LITERAL1
