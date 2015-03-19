@@ -1,6 +1,22 @@
+/*
+
+  Project:       1Sheeld Library 
+  File:          NFCShield.h
+                 
+  Version:       1.2
+
+  Compiler:      Arduino avr-gcc 4.3.2
+
+  Author:        Integreight
+                 
+  Date:          2015.3
+
+*/
+  
 #ifndef NFCShield_h
 #define NFCShield_h
 
+// Input Function ID 
 #define NFC_GET_BASIC_INFO 0x01
 #define NFC_ON_ERROR	   0x02
 
