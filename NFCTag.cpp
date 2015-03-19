@@ -1,20 +1,36 @@
+/*
+
+  Project:       1Sheeld Library 
+  File:          NFCTag.cpp
+                 
+  Version:       1.2
+
+  Compiler:      Arduino avr-gcc 4.3.2
+
+  Author:        Integreight
+                 
+  Date:          2015.3
+
+*/
+
 #include "OneSheeld.h"
 #include "NFCTag.h"
 
 
 NFCRecord NFCTag::nullRecord;
 
-NFCTag::NFCTag(char * _tagId, int _tagSize, int _tagMaxSize, byte _recordsNumber)
+NFCTag::NFCTag(byte * _tagId,byte tagIdLength, int _tagSize, int _tagMaxSize, byte _recordsNumber)
 {
 	isTypeCallBackAssigned= false;
 	isErrorCallBackAssigned= false;
 	isDataCallBackAssigned= false;
 	isParsedDataCallBackAssigned= false;
-
-	int idLength=strlen(_tagId);
-	tagId = (char *) malloc(sizeof(char)*(idLength+1));
-	memcpy(tagId,_tagId,idLength);
-	tagId[idLength]='\0';
+	tagId=NULL;
+	if(tagIdLength!=0)
+	{
+		tagId = (byte *) malloc(sizeof(byte)*(tagIdLength));
+		memcpy(tagId,_tagId,tagIdLength);
+	}
 
 	tagSize =_tagSize;
 	tagMaxSize =_tagMaxSize;

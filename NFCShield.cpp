@@ -58,8 +58,7 @@ void NFCShield::processData()
 		isNewTag = true;
 
 		int tagIdLength = getOneSheeldInstance().getArgumentLength(0);
-		char tagId[tagIdLength+1];
-		tagId[tagIdLength] = '\0';
+		byte tagId[tagIdLength];
 
 		if(tagIdLength!=0)
 		{
