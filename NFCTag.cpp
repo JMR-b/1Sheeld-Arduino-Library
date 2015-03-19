@@ -98,7 +98,7 @@ void NFCTag::setOnError(void (*userFunction)(byte data))
 	errorCallBack = userFunction;
 }
 
-void NFCTag::setOnRecordTypeResponse(void (*userFunction)(byte id, byte data[]))
+void NFCTag::setOnRecordTypeResponse(void (*userFunction)(byte id, byte data[], byte typeLength))
 {
 	isTypeCallBackAssigned =true;
 	recordTypeCallBack = userFunction;
@@ -110,7 +110,7 @@ void NFCTag::setOnRecordParsedDataResponse(void (*userFunction)(byte id, char da
 	recordParsedCallBack = userFunction;
 }
 
-void NFCTag::setOnRecordDataResponse(void (userFunction)(byte id,byte data []))
+void NFCTag::setOnRecordDataResponse(void (userFunction)(byte id,byte data [], byte dataLength))
 {
 	isDataCallBackAssigned =true;
 	recordDataCallBack = userFunction;

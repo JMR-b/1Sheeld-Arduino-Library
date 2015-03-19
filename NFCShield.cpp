@@ -112,7 +112,7 @@ void NFCShield::processData()
 		{
 			byte recordNumber = getOneSheeldInstance().getArgumentData(0)[0];
 
-			int parsedDataLength = getOneSheeldInstance().getArgumentLength(1);
+			byte parsedDataLength = getOneSheeldInstance().getArgumentLength(1);
 			
 			char incomingData[parsedDataLength+1];
 
@@ -133,7 +133,7 @@ void NFCShield::processData()
 		{
 			byte recordNumber = getOneSheeldInstance().getArgumentData(0)[0];
 
-			int typeDataLength = getOneSheeldInstance().getArgumentLength(1);
+			byte typeDataLength = getOneSheeldInstance().getArgumentLength(1);
 			byte incomingType[typeDataLength];
 
 			for (int i = 0; i < typeDataLength; i++)
@@ -142,7 +142,7 @@ void NFCShield::processData()
 			}
 
 			enteringACallback();
-			tag->recordTypeCallBack(recordNumber,incomingType);
+			tag->recordTypeCallBack(recordNumber,incomingType,typeDataLength);
 			exitingACallback();
 		}
 	}
@@ -153,7 +153,7 @@ void NFCShield::processData()
 
 			byte recordNumber = getOneSheeldInstance().getArgumentData(0)[0];
 
-			int dataLength = getOneSheeldInstance().getArgumentLength(1);
+			byte dataLength = getOneSheeldInstance().getArgumentLength(1);
 			byte incomingData[dataLength];
 
 			for (int i = 0; i < dataLength; i++)
@@ -162,7 +162,7 @@ void NFCShield::processData()
 			}
 
 			enteringACallback();
-			tag->recordDataCallBack(recordNumber,incomingData);
+			tag->recordDataCallBack(recordNumber,incomingData,dataLength);
 			exitingACallback();
 		}
 	}

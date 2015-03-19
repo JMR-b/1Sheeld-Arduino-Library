@@ -27,17 +27,18 @@
 class NFCTag
 {
 public:
-	NFCTag(char *, int, int, byte);
+	NFCTag(byte *,byte, int, int, byte);
 	bool isEmpty();
-	char * getId();
+	byte * getId();
+	byte getIdLength();
 	byte getNumberOfRecords();
 	NFCRecord & getRecord(int);
 	int getSize();
 	int getMaxSize();
 	void setOnError(void (*)(byte));
-	void setOnRecordTypeResponse(void (*userFunction)(byte , byte []));
+	void setOnRecordTypeResponse(void (*userFunction)(byte , byte [],byte ));
 	void setOnRecordParsedDataResponse(void (*userFunction)(byte , char[]));
-	void setOnRecordDataResponse(void (userFunction)(byte ,byte []));
+	void setOnRecordDataResponse(void (userFunction)(byte ,byte [],byte ));
 	bool isNull();
 	~NFCTag();
 private:
@@ -46,17 +47,18 @@ private:
 	bool isErrorCallBackAssigned;
 	bool isDataCallBackAssigned;
 	bool isParsedDataCallBackAssigned;
-	char * tagId;
+	byte * tagId;
 	int tagSize;
 	int tagMaxSize;
 	byte recordsNumber;
+	byte tagIdLength;
 	NFCRecord ** recordsArray;
 	static NFCRecord nullRecord;
 
 	void (*errorCallBack)(byte);
-	void (*recordTypeCallBack)(byte , byte[]);
+	void (*recordTypeCallBack)(byte , byte[],byte);
 	void (*recordParsedCallBack)(byte , char[]);
-	void (*recordDataCallBack)(byte , byte[]);
+	void (*recordDataCallBack)(byte , byte[],byte);
 	friend class NFCShield;
 };
 
