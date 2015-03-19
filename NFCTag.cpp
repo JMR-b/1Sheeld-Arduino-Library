@@ -83,8 +83,11 @@ bool NFCTag::isEmpty()
 {
 	return !!recordsNumber;
 }
-
-char * NFCTag::getId()
+byte NFCTag::getIdLength()
+{
+	return tagIdLength;
+}
+byte * NFCTag::getId()
 {
 	return tagId;
 }

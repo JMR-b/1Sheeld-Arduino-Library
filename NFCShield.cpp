@@ -74,10 +74,10 @@ void NFCShield::processData()
 
 		int tagSize = getOneSheeldInstance().getArgumentData(3)[0]|((getOneSheeldInstance().getArgumentData(3)[1])<<8);
 
-		if(tag!=NULL)delete tag;
-		tag=new NFCTag(tagId,tagSize,tagMaxSize,recordsNumber);
+		if(tag!=NULL){delete tag;tag=NULL;}
+		tag=new NFCTag(tagId,tagIdLength,tagSize,tagMaxSize,recordsNumber);
 
-
+		tag->tagIdLength= tagIdLength;
 		if(tag->recordsNumber>0)
 		{
 			byte argumentNo = getOneSheeldInstance().getArgumentNo();
