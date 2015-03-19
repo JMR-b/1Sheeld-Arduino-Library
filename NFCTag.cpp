@@ -40,7 +40,7 @@ NFCTag::NFCTag(byte * _tagId,byte tagIdLength, int _tagSize, int _tagMaxSize, by
 		recordsArray = (NFCRecord **) malloc(sizeof(NFCRecord*)*recordsNumber);
 		for (int i = 0; i < recordsNumber; i++)
 		{
-			recordsArray[i]=new NFCRecord();
+			recordsArray[i]=new NFCRecord(i);
 		}
 	}
 }
