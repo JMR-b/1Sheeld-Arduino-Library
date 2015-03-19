@@ -20,6 +20,12 @@
 #define NFC_GET_BASIC_INFO 0x01
 #define NFC_ON_ERROR	   0x02
 
+//Error Literals 
+#define TAG_NOT_SUPPORTED			0x00
+#define RECORD_CAN_NOT_BE_PARSED	0x01
+#define INDEX_OUT_OF_BOUNDS			0x02
+#define NO_ENOUGH_BYTES				0x03
+  
 #include "ShieldParent.h"
 #include "NFCTag.h"
 #include "NFCRecord.h"
