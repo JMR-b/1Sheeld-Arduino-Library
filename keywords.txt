@@ -188,6 +188,7 @@ addHeader	KEYWORD2
 addParameters	KEYWORD2
 addRawData	KEYWORD2
 getId	KEYWORD2
+getIdLength	KEYWORD2
 deleteHeaders	KEYWORD2
 deleteParameters	KEYWORD2
 deleteCallBacks	KEYWORD2
@@ -259,6 +260,7 @@ getDataLength	KEYWORD2
 queryData	KEYWORD2
 queryType	KEYWORD2
 queryParsedData	KEYWORD2
+NFCTag	KEYWORD2
 #######################################
 # Constants And Literals (KEYWORD2)
 #######################################
