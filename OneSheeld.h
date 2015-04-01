@@ -47,7 +47,7 @@
 
 //Output function ID's
 #define SEND_LIBRARY_VERSION	0x01
-#define WAIT_RESET_APPLICATION	0x02
+#define CHECK_APP_CONNECTION	0x02
 #define CALLBACK_ENTERED		0x03
 #define CALLBACK_EXITED			0x04
 #define MAKE_APP_FOCUSED		0x05
@@ -120,6 +120,7 @@ public:
 	void waitForAppConnection();
 	//Check connection
 	bool isAppConnected();
+	void setOnAppConnected(void (*)(bool));
 	//Getters 
 	byte getShieldId();
 	byte getInstanceId();
@@ -177,6 +178,7 @@ private:
 	bool usedSetOnFloatWithString;
 	bool usedSetOnStringWithString;
 	bool isOneSheeldRemoteDataUsed;
+	bool isAppConnectionCallBack;
 	//Number of connected Remote 1Sheelds
 	int remoteOneSheeldsCounter;
 	#endif
@@ -226,6 +228,7 @@ private:
 	void (*changeStringCallBack)(char [],char [], char []);
 	void (*changeStringCallBackWithString)(String ,String ,String );
 	void (*isAppFocusedCallBack)(bool);
+	void (*isAppConnectedCallBack)(bool);
 	void enteringACallback();
 	void exitingACallback();
 	bool isInACallback();

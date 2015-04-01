@@ -261,6 +261,7 @@ queryData	KEYWORD2
 queryType	KEYWORD2
 queryParsedData	KEYWORD2
 NFCTag	KEYWORD2
+setOnAppConnected	KEYWORD2
 #######################################
 # Constants And Literals (KEYWORD2)
 #######################################
