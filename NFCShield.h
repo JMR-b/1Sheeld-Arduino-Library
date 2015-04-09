@@ -25,6 +25,8 @@
 #define RECORD_CAN_NOT_BE_PARSED	0x01
 #define TAG_NOT_SUPPORTED			0x02
 #define NO_ENOUGH_BYTES				0x03
+#define TAG_READING_ERROR			0x04
+#define RECORD_NOT_FOUND			0x05
   
 #include "ShieldParent.h"
 #include "NFCTag.h"
