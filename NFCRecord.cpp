@@ -18,7 +18,7 @@
 
 
 
-NFCRecord::NFCRecord(int _recordNumber)
+NFCRecord::NFCRecord(byte _recordNumber)
 {
 	recordType =0;
 	recordTypeLength =0;
@@ -62,11 +62,8 @@ void NFCRecord::queryData(int start,byte size)
  	startArray[1] = (start >> 8) & 0xFF;
  	startArray[0] = start & 0xFF;
 
- 	byte recordNumberArray[2] ;
- 	recordNumberArray[1] = (recordNumber >> 8) & 0xFF;
- 	recordNumberArray[0] = recordNumber & 0xFF;
 
-	OneSheeld.sendPacket(NFC_ID,0,NFC_RECORD_QUERY_DATA,3,new FunctionArg(2,recordNumberArray),
+	OneSheeld.sendPacket(NFC_ID,0,NFC_RECORD_QUERY_DATA,3,new FunctionArg(1,&recordNumber),
 														  new FunctionArg(2,startArray),
 														  new FunctionArg(1,&size));
 }
@@ -77,21 +74,14 @@ void NFCRecord::queryType(int start,byte size)
 	startArray[1] = (start >> 8) & 0xFF;
 	startArray[0] = start & 0xFF;
 	
-	byte recordNumberArray[2] ;
- 	recordNumberArray[1] = (recordNumber >> 8) & 0xFF;
- 	recordNumberArray[0] = recordNumber & 0xFF;
  	  	
-	OneSheeld.sendPacket(NFC_ID,0,NFC_RECORD_QUERY_TYPE,3,new FunctionArg(2,recordNumberArray),
+	OneSheeld.sendPacket(NFC_ID,0,NFC_RECORD_QUERY_TYPE,3,new FunctionArg(1,&recordNumber),
 														  new FunctionArg(2,startArray),
 														  new FunctionArg(1,&size));
 
 }
 
 void NFCRecord::queryParsedData()
-{
-	byte recordNumberArray[2] ;
- 	recordNumberArray[1] = (recordNumber >> 8) & 0xFF;
- 	recordNumberArray[0] = recordNumber & 0xFF;
- 	
-	OneSheeld.sendPacket(NFC_ID,0,NFC_RECORD_QUERY_PARSED_DATA,1,new FunctionArg(2,recordNumberArray));
+{ 	
+	OneSheeld.sendPacket(NFC_ID,0,NFC_RECORD_QUERY_PARSED_DATA,1,new FunctionArg(1,&recordNumber));
 }

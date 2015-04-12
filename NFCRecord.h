@@ -35,7 +35,7 @@
 class NFCRecord
 {
 public:
-	NFCRecord(int );
+	NFCRecord(byte );
 	NFCRecord();
 	byte getType();
 	int getTypeLength();
@@ -49,7 +49,7 @@ private:
 	byte recordType;
 	int recordTypeLength;
 	int recordDataLength;
-	int recordNumber;
+	byte recordNumber;
 friend class NFCShield;
 };
 
